@@ -5,6 +5,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
+    private string username;
+
     private ScoreData scoreData;
 
     private void Awake()
@@ -12,6 +14,7 @@ public class ScoreManager : MonoBehaviour
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
 
         Instance = this;
@@ -20,7 +23,12 @@ public class ScoreManager : MonoBehaviour
         LoadScore();
     }
 
-    public void SaveScore(string username, int score)
+    public void UpdateUsername(string value)
+    {
+        username = value;
+    }
+
+    public void SaveScore(int score)
     {
         ScoreData data = new()
         {
@@ -62,5 +70,14 @@ public class ScoreManager : MonoBehaviour
             return "Unknown : 0";
         }
         return $"{scoreData.username} : {scoreData.score}";
+    }
+
+    public string GetBestScoreText(int playerScore)
+    {
+        if (scoreData == null)
+        {
+            return $"Best Score : {username} : {playerScore}";
+        }
+        return $"Best Score : {scoreData.username} : {scoreData.score}";
     }
 }

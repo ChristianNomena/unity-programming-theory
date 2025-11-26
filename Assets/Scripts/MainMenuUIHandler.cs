@@ -15,7 +15,7 @@ public class MainMenuUIHandler : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameplayScene");
     }
 
     public void ExitGame()
